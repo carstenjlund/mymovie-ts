@@ -1,4 +1,4 @@
-import {  movies, genre } from "@/lib/types"
+import {  type Movies } from "@/lib/types"
 import Image from "next/image"
 import GenrePills from "./GenrePills"
 
@@ -24,7 +24,7 @@ if(!response.ok) throw new Error(`Failed to load data: ${response.statusText}`)
 
   export default async function PopularMovies() {
 
-    const movies = await getData() as movies
+    const movies = await getData() as Movies
 
     return (
         <>

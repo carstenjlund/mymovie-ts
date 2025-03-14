@@ -1,4 +1,4 @@
-import { movies } from "@/lib/types"
+import { Movies } from "@/lib/types"
 import Image from "next/image"
 export async function getData() {
     let response =  await fetch("https://api.themoviedb.org/3/movie/now_playing", {
@@ -14,7 +14,7 @@ export async function getData() {
 
   export default async function NowShowing() {
 
-    const movies: movies = await getData()
+    const movies: Movies = await getData()
 
     return (
         <>

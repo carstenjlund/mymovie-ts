@@ -1,4 +1,4 @@
-export type movie ={
+export type Movie ={
     id: number,
     title: string,
     poster_path: string,
@@ -8,11 +8,11 @@ export type movie ={
     genre_ids: number[]
 }
 
-export type movies = {
-    results: movie[]
+export type Movies = {
+    results: Movie[]
 }
 
-export type genre = {
+export type Genre = {
     id: number,
     name: string
 }
