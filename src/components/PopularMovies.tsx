@@ -36,7 +36,7 @@ if(!response.ok) throw new Error(`Failed to load data: ${response.statusText}`)
                   <p>{movie.title}</p>
                   <p>{movie.vote_average.toFixed(1)} / 10 IMDb</p>
                   <GenrePills genre_ids={movie.genre_ids} />
-                  <a className="absolute inset-0" href="/detail/{movie.id}"></a>
+                  <a className="absolute inset-0" href={`/detail/${movie.id}`}></a>
                 </div>
             </article>
         ))}

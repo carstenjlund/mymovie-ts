@@ -23,7 +23,7 @@ export async function getData() {
                 <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} width="500" height="800" alt=""></Image>
                 <p>{movie.title}</p>
                 <p>{movie.vote_average.toFixed(1)} / 10 IMDb</p>
-                <a className="absolute inset-0" href="/detail/{movie.id}"></a>
+                <a className="absolute inset-0" href={`/detail/${movie.id}`}></a>
             </article>
         ))}
         </>
