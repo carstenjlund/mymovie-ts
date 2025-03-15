@@ -10,17 +10,22 @@ export type Movie ={
     genre_ids: number[]
     genres: Genre[]
     spoken_languages: Language[]
-    release_dates: ReleaseDates
+    release_dates: ReleaseResults
 }
 
-export type ReleaseDates = {
-    results: Release[]
+export type ReleaseResults = {
+    results: ReleaseCountry[]
 }
-export type Release = {
+
+
+export type ReleaseCountry = {
     iso_3166_1: string
-    release_dates: {
-        certification: string
-    }[]
+    release_dates: ReleaseDate[]
+}
+
+export type ReleaseDate = {
+    certification: string
+    release_date: string
 }
 
 export type Movies = {
