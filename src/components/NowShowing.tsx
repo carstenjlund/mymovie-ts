@@ -1,7 +1,12 @@
-import { Movies } from "@/lib/types"
+import { Movie } from "@/lib/types"
 import Image from "next/image"
 import Link from "next/link"
-export async function getData() {
+
+type ApiResponse = {
+    results: Movie[]
+}
+
+export async function getData(): Promise<ApiResponse> {
     const response = await fetch("https://api.themoviedb.org/3/movie/now_playing", {
       headers: {
         accept: 'application/json',
@@ -15,7 +20,7 @@ export async function getData() {
 
   export default async function NowShowing() {
 
-    const movies: Movies = await getData()
+    const movies = await getData()
     
 
     return (

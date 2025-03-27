@@ -1,7 +1,14 @@
 import { type Genre } from "@/lib/types";
 
-export async function getGenres() {
-    let response =  await fetch("https://api.themoviedb.org/3/genre/movie/list", {
+type apiResponse = {
+    genres: Genre[]
+}
+type GenrePillsProps = {
+    genre_ids: number[]
+}
+
+export async function getGenres(): Promise<apiResponse> {
+    const response =  await fetch("https://api.themoviedb.org/3/genre/movie/list", {
       headers: {
         accept: 'application/json',
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
@@ -11,14 +18,14 @@ export async function getGenres() {
     return await response.json()
   }
 
-export default async function GenrePills ( {genre_ids} : {genre_ids: number[]}) {
-    const { genres }: { genres: Genre[] } = await getGenres() 
+export default async function GenrePills ( {genre_ids} : GenrePillsProps) {
+    const { genres } = await getGenres() 
 
     return (
         <div>
             {genre_ids.map(id => {
-                let currentGenre = genres.find(genre => genre.id == id) as Genre
-               return (<span key={id} className="text-[0.625rem] font-bold uppercase mr-2 text-blue-600 bg-blue-300 pt-0.5 pb-[0.125rem] px-2 rounded-full inline-block">{currentGenre.name}</span>)}
+                const currentGenre = genres.find(genre => genre.id == id) as Genre
+               return (<span key={id} className="text-[0.56rem] font-bold uppercase mr-1 text-blue-400 bg-blue-100 pt-0.5 pb-[0.125rem] px-2 rounded-full inline-block">{currentGenre.name}</span>)}
                 
             )}
         </div>

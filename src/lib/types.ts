@@ -28,9 +28,6 @@ export type ReleaseDate = {
     release_date: string
 }
 
-export type Movies = {
-    results: Movie[]
-}
 
 export type Genre = {
     id: number,

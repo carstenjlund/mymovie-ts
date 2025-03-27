@@ -1,9 +1,12 @@
-import {  type Movies } from "@/lib/types"
+import {  type Movie } from "@/lib/types"
 import Image from "next/image"
 import GenrePills from "./GenrePills"
 
+type ApiResponse = {
+    results: Movie[]
+}
 
-export async function getData() {
+export async function getData(): Promise<ApiResponse> {
   const response =  await fetch("https://api.themoviedb.org/3/movie/popular", {
     headers: {
       accept: 'application/json',
@@ -18,7 +21,7 @@ if(!response.ok) throw new Error(`Failed to load data: ${response.statusText}`)
 
   export default async function PopularMovies() {
 
-    const movies = await getData() as Movies
+    const movies = await getData()
 
     return (
         <>
