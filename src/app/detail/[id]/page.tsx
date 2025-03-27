@@ -1,6 +1,8 @@
 import Image from 'next/image'
+import { MdStarRate } from 'react-icons/md'
 import { ReleaseCountry, ReleaseDate, ReleaseResults, type Movie } from "@/lib/types"
-async function getSingleMovie(id: string) {
+
+async function getSingleMovie(id: string): Promise<Movie> {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates`, {
         headers: {
           accept: 'application/json',
@@ -14,7 +16,7 @@ async function getSingleMovie(id: string) {
 export default async function Page({ params }: { params: Promise<{ id: string }>}) {
     
     const { id } = await params
-    const movie: Movie  = await getSingleMovie(id)
+    const movie  = await getSingleMovie(id)
 
     function findRating(release_dates_array: ReleaseResults): string {
         const us_dates = release_dates_array?.results?.find(element => element.iso_3166_1 === "US") as ReleaseCountry
@@ -25,25 +27,34 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     return (
         <>
             <Image className="w-full" src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} width="800" height="400" alt=""></Image>    
-            <h1>{movie.title}</h1>
-            <p>{movie.vote_average.toFixed(1)} / 10 IMDb</p>
+            <section className='p-4 pt-6 flex flex-col gap-4 rounded-xl -mt-2 relative z-10 bg-[white] dark:bg-[#0a0a0a]'>
 
-            <section className="flex justify-between">
-            <div>
-                <p>length:</p>
-                <p>{Math.floor(movie.runtime/60)}h {movie.runtime%60}m</p>
-            </div>
-            <div>
-                <p>Language:</p>
-                <p>{movie.spoken_languages.map(language => (<span className="mr-1" key={language.english_name}>{language.english_name}</span> ))}</p>
-            </div>
-            <div>
-                <p>Rating:</p>
-                <p>{findRating(movie.release_dates)}</p>
-            </div>
+                <h1 className='font-bold text-xl text-balance leading-none'>{movie.title}</h1>
+                <div>
+                    {movie.genres.map(genre => 
+                        (<span key={genre.id} className="text-[0.56rem] font-bold uppercase mr-1 text-blue-400 bg-blue-100 pt-0.5 pb-[0.125rem] px-2 rounded-full inline-block">{genre.name}</span>)
+                    )}
+                </div>
+                
+                <p className='flex'><MdStarRate color='gold' size="22" className='mr-1' /> {movie.vote_average.toFixed(1)} / 10 IMDb</p>
 
+                <div className="flex justify-between text-sm">
+                    <div>
+                        <p className='font-bold'>length:</p>
+                        <p>{Math.floor(movie.runtime/60)}h {movie.runtime%60}m</p>
+                    </div>
+                    <div>
+                        <p className='font-bold'>Language:</p>
+                        <p>{movie.spoken_languages[0].english_name}</p>
+                    </div>
+                    <div>
+                        <p className='font-bold'>Rating:</p>
+                        <p>{findRating(movie.release_dates)}</p>
+                    </div>
+
+                </div>
+                <p>{movie.overview}</p>
             </section>
-            <p>{movie.overview}</p>
         </>
     )
 }
