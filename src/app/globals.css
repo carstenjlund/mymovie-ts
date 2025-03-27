@@ -6,19 +6,16 @@
 }
 
 :root {
+  color-scheme: light dark;
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* x */
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: light-dark(var(--foreground), var(--background));
+  background: light-dark(var(--background), var(--foreground));
   font-family: Arial, Helvetica, sans-serif;
 }
+
