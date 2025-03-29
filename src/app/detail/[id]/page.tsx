@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     return (
         <>
             <Image className="w-full" src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} width="800" height="400" alt=""></Image>    
-            <section className='p-4 pt-6 flex flex-col gap-4 rounded-xl -mt-2 relative z-10 bg-[white] dark:bg-[#0a0a0a]'>
+            <section className='p-4 pt-6 flex flex-col gap-4 rounded-xl -mt-2 relative z-10 bg-white dark:bg-[#171717]'>
 
                 <h1 className='font-bold text-xl text-balance leading-none'>{movie.title}</h1>
                 <div>
