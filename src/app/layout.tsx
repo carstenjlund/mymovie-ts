@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
 import { ThemeProvider } from 'next-themes'
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,16 +36,7 @@ export default function RootLayout({
           <main className="mb-20">
             {children}
           </main>
-          <footer className="fixed bottom-0 w-full">
-          
-            <nav className="p-4 border-t bg-white dark:bg-black border-gray-200 dark:border-gray-700">
-              <ul className="flex justify-between">
-                <li><Link href="/">X</Link></li>
-                <li><Link href="#">X</Link></li>
-                <li><Link href="#">X</Link></li>
-              </ul>
-            </nav>
-          </footer>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
