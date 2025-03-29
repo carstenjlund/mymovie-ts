@@ -18,7 +18,7 @@ export default function Header() {
 
     return (
         <header className={`grid grid-cols-[3rem_1fr_3rem] items-center p-4 ${pathname.startsWith("/detail") ? "absolute top-0 left-0 w-full" : ""}`}>
-            {pathname === "/" ? <MdOutlineDehaze /> : <Link href="/"><IoMdArrowRoundBack /></Link>}
+            {pathname === "/" ? <MdOutlineDehaze size={24} /> : <Link href="/"><IoMdArrowRoundBack size={24} /></Link>}
           <h1 className={`${merriweather.className} text-center`}>{pathname === "/" ? "MyMovie" : ""}</h1>
           
           

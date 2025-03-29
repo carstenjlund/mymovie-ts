@@ -1,17 +1,24 @@
 "use client";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useTheme } from 'next-themes'
+import { useEffect, useState } from "react";
 
 export default function DarkModeSwitcher() {
     const { setTheme, resolvedTheme } = useTheme()
+    const [mounted, setMounted] = useState(false);
 
-    console.log(resolvedTheme);
-    
+    useEffect(() => {
+        setMounted(true);
+    }, []);
     
     const handleThemeChange = () => {
         setTheme(resolvedTheme === "dark" ? "light" : "dark");
     }
    
+    if (!mounted) {
+        return null; // Avoid rendering incorrect icons due to hydration mismatch
+    }
+
 
     return (
         <button
