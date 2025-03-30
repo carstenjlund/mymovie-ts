@@ -11,6 +11,7 @@ export type Movie ={
     genres: Genre[]
     spoken_languages: Language[]
     release_dates: ReleaseResults
+    credits: Credits
 }
 
 export type ReleaseResults = {
@@ -40,4 +41,14 @@ export type Language = {
     name: string
 }
 
+export type Credits = {
+    cast: Member[]
+    crew: Member[]
+}
 
+export type Member = {
+    id: number
+    name: string
+    profile_path: string
+    character: string
+}
