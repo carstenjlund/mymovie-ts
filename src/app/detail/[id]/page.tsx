@@ -3,7 +3,7 @@ import { MdStarRate } from 'react-icons/md'
 import { ReleaseCountry, ReleaseDate, ReleaseResults, type Movie } from "@/lib/types"
 
 async function getSingleMovie(id: string): Promise<Movie> {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates`, {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits`, {
         headers: {
           accept: 'application/json',
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
@@ -17,6 +17,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     
     const { id } = await params
     const movie  = await getSingleMovie(id)
+    console.log(movie)
 
     function findRating(release_dates_array: ReleaseResults): string {
         const us_dates = release_dates_array?.results?.find(element => element.iso_3166_1 === "US") as ReleaseCountry
@@ -54,7 +55,24 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
                 </div>
                 <p>{movie.overview}</p>
+
             </section>
+            <section>
+                <header className='mx-6 mt-6 mb-2'>
+                <h2 className='font-bold text-lg'>Cast</h2>
+                </header>
+                <div className='flex overflow-x-scroll gap-4'>
+                    {movie.credits.cast.map(member =>
+                        (<div key={member.id} className="flex flex-col first:ml-4 last:mr-4">
+                            <div className='w-20 h-28 overflow-hidden rounded '>
+
+                            <Image className='w-full h-full object-cover' src={`https://image.tmdb.org/t/p/w500${member.profile_path}`} width="100" height="100" alt=""></Image>
+                            </div>
+                            <p className='mt-1 text-xs font-bold'>{member.name}</p>
+                        </div>)
+                    )}
+                </div>
+                </section>
         </>
     )
 }
